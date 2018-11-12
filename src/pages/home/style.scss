@@ -1,0 +1,10 @@
+@import '../../style/default';
+
+.wrap-content {
+  height: calc(60vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background-color: $colorM;
+}

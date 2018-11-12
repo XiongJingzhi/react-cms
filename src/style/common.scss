@@ -1,0 +1,17 @@
+@import './default';
+
+.container {
+  .nav-left {
+    height: calc(100vh);
+    color: $colorM;
+    background: $colorR;
+  }
+  .main {
+    height: calc(100vh);
+    background-color: $colorL;
+  }
+  .content {
+    position: relative;
+    padding: 20px;
+  }
+}

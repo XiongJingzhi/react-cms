@@ -1,0 +1,19 @@
+@import '../../style/default';
+
+.nav-left {
+  .logo {
+    line-height: 90px;
+    padding-left: 20px;
+    img {
+      width: 35px;
+      height: 35px;
+    }
+    h1 {
+      display: inline-block;    
+      margin: 0 0 0 10px;
+      vertical-align: middle;
+      color: $colorM;
+      font-size: 20px;
+    }
+  }
+}

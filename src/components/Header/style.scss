@@ -1,0 +1,45 @@
+@import '../../style/default';
+
+.header {
+  background-color: $colorM;
+  .header-top {
+    height: 60px;
+    line-height: 60px;
+    padding: 0 40px;
+    border-bottom: 2px solid $colorP;
+    text-align: right;
+    span {
+      display: inline-block;
+      padding-right: 40px; 
+    }
+  }
+  .breadcrumb {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    .breadcrumb-title {
+      display: inline-block;
+      text-align: center;
+    }
+    .breadcrumb-weather {
+      display: inline-block;
+      font-size: 14px;
+      text-align: right;
+      .breadcrumb-date {
+        display: inline-block;
+        padding-right: 10px;
+      }
+      .whether-img {
+        padding: 0 1px 0 5px;
+        img {
+          height: 16px;
+          margin-top: -4px;
+        }
+      }
+      span {
+        display: inline-block;
+        padding: 0 10px 0 0 ;
+      }
+    }
+  }
+}
