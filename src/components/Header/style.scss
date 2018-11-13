@@ -20,10 +20,21 @@
     .breadcrumb-title {
       display: inline-block;
       text-align: center;
+      font-size: $fontC;
+      &:after {
+        position: absolute;
+        left: 50%;
+        bottom: -13.5px;
+        transform: translateX(-50%);
+        content: '';
+        border-top: 13.5px solid $colorM;
+        border-left: 18px solid transparent;
+        border-right: 18px solid transparent;
+      }
     }
     .breadcrumb-weather {
       display: inline-block;
-      font-size: 14px;
+      font-size: $fontE;
       text-align: right;
       .breadcrumb-date {
         display: inline-block;

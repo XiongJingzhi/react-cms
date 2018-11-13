@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import { Menu } from 'antd'
 
 import MenuConfig from '../../config/menuConfig'
@@ -20,13 +21,13 @@ export default class NavLeft extends Component {
       if (item.children) {
         return (
           <SubMenu title={item.title} key={item.key}>
-            { this.renderMenu(item.children)}
+            { this.renderMenu(item.children) }
           </SubMenu>
         )
       }
       return (
         <Menu.Item title={item.title} key={item.key}>
-          <a href={item.key}>{item.title}</a>
+          <NavLink to={item.key}>{item.title}</NavLink>
         </Menu.Item>
       )
     })
