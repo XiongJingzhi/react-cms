@@ -1,0 +1,56 @@
+.card-wrap{
+  margin-bottom: 10px;
+  button{
+      margin-right: 10px;
+  }
+}
+/* modals */
+/* use css to set position of modal */
+.vertical-center-modal {
+  text-align: center;
+  white-space: nowrap;
+  // transform: translate(-50%, -50%);
+  // left: 50%;
+  // top: 50%;
+  // overflow: hidden;
+}
+
+.vertical-center-modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  width: 0;
+}
+
+.vertical-center-modal .ant-modal {
+  display: inline-block;
+  vertical-align: middle;
+  top: 0;
+  text-align: left;
+}
+
+/* carousel */
+/* use css to set position of carousel */
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: 160px;
+  line-height: 160px;
+  background: #364d79;
+  overflow: hidden;
+}
+
+.ant-carousel .slick-slide h3 {
+  color: #fff;
+}
+
+.ant-carousel .slick-slide{
+  height: 240px!important;
+}
+
+.carousel-list {
+  position: absolute;
+  left: 20px;
+  width: 300px;
+  height: 240px;
+}

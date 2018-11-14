@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
+import { NavLink } from 'react-router-dom'
 import Util from '@/utils/util'
 import Axios from '@/axios/index'
 import './style.scss'
+
 export default class Header extends Component {
   componentWillMount() {
     let sysTime = Util.formatDate(new Date().getTime())
@@ -25,7 +27,6 @@ export default class Header extends Component {
         url: `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`
     })
       .then((res) => {
-        console.log(res)
         let data = res.results[0].weather_data[0]
         let picUrl = Util.isNight() ? data.nightPictureUrl: data.dayPictureUrl
         this.setState({
@@ -44,7 +45,7 @@ export default class Header extends Component {
         <Row className="header-top">
           <Col span={24}>
             <span>欢迎， {this.state.userName}</span>
-            <a href="/logout">退出</a>
+            <NavLink to="/logout">退出</NavLink>
           </Col>
         </Row>
         <Row className="breadcrumb">
