@@ -51,7 +51,7 @@ const menuList = [
       },
       {
         title: '注册',
-        key: '/form/reg'
+        key: '/form/register'
       }
     ]
   },
@@ -71,7 +71,7 @@ const menuList = [
   },
   {
     title: '富文本',
-    key: '/rich'
+    key: '/editor'
   },
   {
     title: '城市管理',

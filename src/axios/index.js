@@ -28,7 +28,7 @@ export default class Axios {
       axios({
         url: options.url,
         method: 'get',
-        baseUrl: baseApi,
+        baseURL: baseApi,
         timeout: 5000,
         params: (options.data && options.data.params) || ''
       })
