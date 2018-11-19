@@ -32,13 +32,13 @@ export default class NavLeft extends Component {
       )
     })
   }
-  handleClick = (e) => {
-    console.log('handleClick', e, this)
+  handleClick = () => {
+    console.log('handleClick', this)
   }
   render() {
     return (
       <div className="nav-left">
-        <div className="logo" onClick={this.handleClick}>
+        <div className="logo" onClick={() => this.handleClick}>
           <img src="/assets/logo-ant.svg" alt="logo"/>
           <h1>CMS</h1>
         </div>

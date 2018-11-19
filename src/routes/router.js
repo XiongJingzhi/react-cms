@@ -23,6 +23,43 @@ import BarChart from '@/pages/chart/bar'
 import PieChart from '@/pages/chart/pie'
 import LineChart from '@/pages/chart/line'
 import Permission from '@/pages/permission'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+const routes = [
+  { path: '/home', component: Home },
+  { path: '/ui/buttons', component: Button },
+  { path: '/ui/modals', component: Modal },
+  { path: '/ui/notifications', component: Notifications },
+  { path: '/ui/loadings', component: Loading },
+  { path: '/ui/messages', component: Messages },
+  { path: '/ui/gallery', component: Gallery },
+  { path: '/ui/tabs', component: Tabs },
+  { path: '/ui/carousel', component: Carousel },
+  { path: '/form/login', component: FormLogin },
+  { path: '/form/register', component: FormRegister },
+  { path: '/table/basic', component: BasicTable },
+  { path: '/editor', component: RichEdit },
+  { path: '/city', component: City },
+  { path: '/order', component: Order },
+  { path: '/user', component: User },
+  { path: '/bikeMap', component: BikeMap },
+  { path: '/charts/line', component: LineChart },
+  { path: '/charts/pie', component: PieChart },
+  { path: '/charts/bar', component: BarChart },
+  { path: '/permission', component: Permission }
+]
+class FancyRoute extends React.Component {
+  componentWillMount() {
+    nprogress.start()
+  }
+  componentDidMount() {
+    nprogress.done()
+  }
+  render() {
+    return <Route {...this.props} />
+  }
+}
 
 export default class ERouter extends Component {
   render() {
@@ -35,27 +72,11 @@ export default class ERouter extends Component {
             component={() => (
               <Admin>
                 <Switch>
-                  <Route path="/home" component={Home} />
-                  <Route path="/ui/buttons" component={Button} />
-                  <Route path="/ui/modals" component={Modal} />
-                  <Route path="/ui/loadings" component={Loading} />
-                  <Route path="/ui/notifications" component={Notifications} />
-                  <Route path="/ui/messages" component={Messages} />
-                  <Route path="/ui/tabs" component={Tabs} />
-                  <Route path="/ui/gallery" component={Gallery} />
-                  <Route path="/ui/carousel" component={Carousel} />
-                  <Route path="/form/login" component={FormLogin} />
-                  <Route path="/form/register" component={FormRegister} />
-                  <Route path="/table/basic" component={BasicTable} />
-                  <Route path='/editor' component={RichEdit} />
-                  <Route path='/city' component={City} />
-                  <Route path='/order' component={Order} />
-                  <Route path='/user' component={User} />
-                  <Route path='/bikeMap' component={BikeMap} />
-                  <Route path='/charts/line' component={LineChart} />
-                  <Route path='/charts/pie' component={PieChart} />
-                  <Route path='/charts/bar' component={BarChart} />
-                  <Route path='/permission' component={Permission} />
+                  {
+                    routes.map((route, i) => (
+                      <FancyRoute key={i} {...route} />
+                    ))
+                  }
                   <Redirect to="/home" />
                 </Switch>
               </Admin>

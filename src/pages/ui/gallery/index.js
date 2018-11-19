@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Row, Col, Modal } from 'antd'
+import '../style.scss'
 
 export default class Gallery extends Component {
   state = {

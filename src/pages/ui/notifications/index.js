@@ -4,6 +4,8 @@ import '../style.scss'
 
 export default class ENotification extends Component {
   openNotification = (type, direction) => {
+    console.log('this', this)
+    console.log('type', type, 'direction', direction)
     if (direction) {
       notification.config({
         placement: direction
@@ -20,10 +22,9 @@ export default class ENotification extends Component {
     return (
       <div>
         <Card title="通知 Notification" className="card-wrap">
-          <Button
-            type="primary"
-            onClick={() => this.openNotification('success')}
-          >
+        {/* 此处传参，使用的是闭包，本来onclick函数没有参数，
+        要调用参数就只能写在内部，传递了this*/}
+          <Button type="primary" onClick={() => this.openNotification('success')} >
             Success
           </Button>
           <Button type="primary" onClick={() => this.openNotification('info')}>
