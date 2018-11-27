@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Tabs, message, Icon } from 'antd'
+import BreadcrumbCustom from '@/components/Breadcrumb'
 import '../style.scss'
 
 export default class TabPages extends Component {
@@ -28,11 +29,9 @@ export default class TabPages extends Component {
     })
   }
   handleCallback = (key) => {
-    console.log(key, this)
     message.info("Hi,您选择了页签："+key)
   }
   onChange = (activeKey) => {
-    console.log(activeKey, this)
     this.setState({
       activeKey
     })
@@ -65,6 +64,7 @@ export default class TabPages extends Component {
     const { activeKey, panes } = this.state
     return (
       <div>
+        <BreadcrumbCustom first="UI" second="tabs" />
         <Card title="Tab标签" className="card-wrap">
           <Tabs defaultActiveKey="1" onChange={this.handleCallback}>
             <TabPane tab="Tab 1" key="1">Content of Tab Pane 1</TabPane>

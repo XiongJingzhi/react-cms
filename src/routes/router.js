@@ -23,7 +23,7 @@ import BarChart from '@/pages/chart/bar'
 import PieChart from '@/pages/chart/pie'
 import LineChart from '@/pages/chart/line'
 import Permission from '@/pages/permission'
-import nprogress from 'nprogress'
+import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 const routes = [
@@ -51,10 +51,10 @@ const routes = [
 ]
 class FancyRoute extends React.Component {
   componentWillMount() {
-    nprogress.start()
+    NProgress.start()
   }
   componentDidMount() {
-    nprogress.done()
+    NProgress.done()
   }
   render() {
     return <Route {...this.props} />

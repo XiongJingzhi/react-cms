@@ -1,29 +1,8 @@
-/**
- * Created by hao.cheng on 2017/4/23.
- */
 import React, { Component } from 'react'
-import { Row, Col, Card, Spin, Alert, Switch, Button, Breadcrumb } from 'antd'
-import { Link } from 'react-router-dom'
+import { Row, Col, Card, Spin, Alert, Switch, Button } from 'antd'
+import BreadcrumbCustom from '@/components/Breadcrumb'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-
-class BreadcrumbCustom extends React.Component {
-  render() {
-    const first = <Breadcrumb.Item>{this.props.first}</Breadcrumb.Item> || ''
-    const second = <Breadcrumb.Item>{this.props.second}</Breadcrumb.Item> || ''
-    return (
-      <span>
-        <Breadcrumb style={{ margin: '12px 0' }}>
-          <Breadcrumb.Item>
-            <Link to={'/home'}>首页</Link>
-          </Breadcrumb.Item>
-          {first}
-          {second}
-        </Breadcrumb>
-      </span>
-    )
-  }
-}
 
 class Spins extends Component {
   state = { loading: false }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button, message } from 'antd'
+import BreadcrumbCustom from '@/components/Breadcrumb'
 import '../style.scss'
 
 export default class Messages extends Component {
@@ -11,6 +12,7 @@ export default class Messages extends Component {
   render() {
     return (
       <div>
+        <BreadcrumbCustom first="UI" second="messages" />
         <Card title="Messages" className="card-wrap">
           <Button type="primary" onClick={()=>this.showMessage('success')}>Success</Button>
           <Button type="primary" onClick={()=>this.showMessage('error')}>Error</Button>

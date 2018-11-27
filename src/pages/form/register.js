@@ -22,7 +22,9 @@ const RadioGroup = Radio.Group
 const Option = Select.Option
 const TextArea = Input.TextArea
 class FormRegister extends React.Component {
-  state = {}
+  state = {
+    loading: false
+  }
 
   handleSubmit = () => {
     let userInfo = this.props.form.getFieldsValue()
@@ -54,6 +56,19 @@ class FormRegister extends React.Component {
         })
       )
     }
+  }
+
+  handleBeforeUpload = file => {
+    const allowedFileType = ["image/png", "image/jpeg", "image/gif"]
+    const isJPG = allowedFileType.includes(file.type)
+    if (!isJPG) {
+      message.error('Your loading picture is formatting wrong!')
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!')
+    }
+    return isJPG && isLt2M
   }
 
   render() {
@@ -171,19 +186,23 @@ class FormRegister extends React.Component {
                   showUploadList={false}
                   action="//jsonplaceholder.typicode.com/posts/"
                   onChange={this.handleChange}
+                  beforeUpload={this.handleBeforeUpload}
                 >
                   {this.state.userImg ? (
-                    <img src={this.state.userImg} alt="img"/>
+                    <img src={this.state.userImg} alt="img" />
                   ) : (
-                    <Icon type="plus" />
+                    <div>
+                      <Icon type={this.state.loading ? 'loading' : 'plus'} />
+                      <div className="ant-upload-text">Upload</div>
+                    </div>
                   )}
                 </Upload>
               )}
             </FormItem>
             <FormItem {...offsetLayout}>
-              {getFieldDecorator('userImg')(
+              {getFieldDecorator('protocol')(
                 <Checkbox>
-                  我已阅读过<a href="##">慕课协议</a>
+                  我已阅读过<a href="##">协议</a>
                 </Checkbox>
               )}
             </FormItem>

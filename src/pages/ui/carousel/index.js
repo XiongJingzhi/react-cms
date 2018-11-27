@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Card, Carousel } from 'antd'
+import BreadcrumbCustom from '@/components/Breadcrumb'
 import '../style.scss'
 
 export default class Carousels extends Component {
   render() {
     return (
       <div>
+        <BreadcrumbCustom first="ui" second="carousel" />
         <Card title="text-carousel" className="card-wrap">
           <Carousel autoplay effect="fade">
             <div>

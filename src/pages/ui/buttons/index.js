@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Icon, Button, Radio } from 'antd'
+import BreadcrumbCustom from '@/components/Breadcrumb'
 import '../style.scss'
 
 export default class Buttons extends Component {
@@ -20,6 +21,7 @@ export default class Buttons extends Component {
   render() {
     return (
       <div>
+        <BreadcrumbCustom first="UI" second="buttons" />
         <Card title="基础按钮" className="card-wrap">
           <Button type="primary">按钮</Button>
           <Button type="normal">按钮</Button>

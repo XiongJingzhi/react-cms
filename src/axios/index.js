@@ -1,6 +1,20 @@
 import axios from 'axios'
 import Jsonp from 'jsonp'
 import { Modal } from 'antd'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+axios.interceptors.request.use(function (config) {
+  console.log('axios interceptors start')
+  NProgress.start()
+  return config
+})
+
+axios.interceptors.response.use(function (config) {
+  console.log('axios interceptor response ending')
+  NProgress.done()
+  return config
+})
 
 export default class Axios {
   static jsonp(options) {
@@ -18,11 +32,11 @@ export default class Axios {
   }
 
   static ajax(options) {
-    let loading
-    if (options.data && options.data.isShowLoading !== false) {
-      loading = document.getElementById('ajaxLoading')
-      loading.style.display = 'block'
-    }
+    // let loading
+    // if (options.data && options.data.isShowLoading !== false) {
+    //   loading = document.getElementById('ajaxLoading')
+    //   loading.style.display = 'block'
+    // }
     let baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api'
     return new Promise((resolve, reject) => {
       axios({
@@ -33,13 +47,13 @@ export default class Axios {
         params: (options.data && options.data.params) || ''
       })
         .then((response) => {
-          if (options.data && options.data.isShowLoading !== false) {
-            loading = document.getElementById('ajaxLoading')
-            loading.style.display = 'block'
-          }
-          if (options.status === '200') {
+          // if (options.data && options.data.isShowLoading !== false) {
+          //   loading = document.getElementById('ajaxLoading')
+          //   loading.style.display = 'block'
+          // }
+          if (response.status === 200 ) {
             let res = response.data
-            if (res.result === '0') {
+            if (res.code === '0') {
               resolve(res)
             } else {
               Modal.info({
@@ -48,7 +62,7 @@ export default class Axios {
               })
             }
           } else {
-            reject(response.data)
+            reject(response)
           }
         })
     })

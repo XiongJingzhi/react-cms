@@ -11,12 +11,13 @@ class FormLogin extends React.Component {
           `
           当前用户为: ${userInfo.userName}
           当前密码为：${userInfo.userPwd}
+          是否选中：${userInfo.remember}
           `
         )
       }
     })
   }
-  
+
   render() {
     const { getFieldDecorator } = this.props.form
     return (
@@ -76,7 +77,7 @@ class FormLogin extends React.Component {
             <FormItem>
               {getFieldDecorator('remember', {
                 valuePropName: 'checked',
-                initialValue: true
+                initialValue: false
               })(<Checkbox>记住密码</Checkbox>)}
               <a href="##" style={{ float: 'right' }}>
                 忘记密码

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button, notification } from 'antd'
+import BreadcrumbCustom from '@/components/Breadcrumb'
 import '../style.scss'
 
 export default class ENotification extends Component {
@@ -21,6 +22,7 @@ export default class ENotification extends Component {
   render() {
     return (
       <div>
+        <BreadcrumbCustom first="UI" second="notifications" />
         <Card title="通知 Notification" className="card-wrap">
         {/* 此处传参，使用的是闭包，本来onclick函数没有参数，
         要调用参数就只能写在内部，传递了this*/}

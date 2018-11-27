@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button, Table, Form, Select, Modal, message } from 'antd'
-import axios from '@/axios'
+import Axios from '@/axios'
 import Utils from '@/utils/util'
 
 const FormItem = Form.Item
@@ -124,8 +124,8 @@ export default class City extends Component {
 
   // 默认请求我们的接口数据
   requestList = () => {
-    let _this = this
-    axios
+    // let _this = this
+    Axios
       .ajax({
         url: '/open_city',
         data: {
@@ -134,19 +134,23 @@ export default class City extends Component {
           }
         }
       })
-      .then(res => {
-        let list = res.result.item_list.map((item, index) => {
-          item.key = index
-          return item
+        .then(res => {
+          console.log('res response', res)
+          // let list = res.result.item_list.map((item, index) => {
+          //   item.key = index
+          //   return item
+          // })
+          // this.setState({
+          //   list: list,
+          //   pagination: Utils.pagination(res, current => {
+          //     _this.params.page = current
+          //     _this.requestList()
+          //   })
+          // })
         })
-        this.setState({
-          list: list,
-          pagination: Utils.pagination(res, current => {
-            _this.params.page = current
-            _this.requestList()
-          })
+        .catch((err) => {
+          console.log('err', err)
         })
-      })
   }
 
   // 开通城市
@@ -159,7 +163,7 @@ export default class City extends Component {
   handleSubmit = () => {
     let cityInfo = this.cityForm.props.form.getFieldsValue()
     console.log(cityInfo)
-    axios
+    Axios
       .ajax({
         url: '/city/open',
         data: {

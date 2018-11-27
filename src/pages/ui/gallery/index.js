@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Row, Col, Modal } from 'antd'
+import BreadcrumbCustom from '@/components/Breadcrumb'
 import '../style.scss'
 
 export default class Gallery extends Component {
@@ -39,6 +40,7 @@ export default class Gallery extends Component {
     )
     return (
       <div className="card-wrap">
+        <BreadcrumbCustom first={"UI"} second={"Gallery"} />
         <Row gutter={10}>
           <Col md={5}>{imgList[0]}</Col>
           <Col md={5}>{imgList[1]}</Col>

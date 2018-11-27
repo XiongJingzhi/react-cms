@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Button, Modal } from 'antd'
+import BreadcrumbCustom from '@/components/Breadcrumb'
+import '../style.scss'
 
 export default class Model extends Component {
   state = {
@@ -67,6 +69,7 @@ export default class Model extends Component {
 
     return (
       <div>
+        <BreadcrumbCustom first="UI" second="modals" />
         <Card title="基础模拟框" className="card-wrap">
           <Button type="primary" onClick={() => this.showModal('showModal1')}>
             Open1

@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { Card, Button } from 'antd'
+import { Form, Input } from 'antd'
 
+const FormItem = Form.Item
 export default class Permission extends Component {
   render() {
     return (
-      <div>
-        <Card title="权限管理">
-          <Button>权限</Button>
-          <p>权限管理</p>
-        </Card>
-      </div>
+      <Form layout="horizontal">
+        <FormItem label="角色">
+          <Input disabled maxLength={8} placeholder={'hello world'} />
+        </FormItem>
+      </Form>
     )
   }
 }
