@@ -1,3 +1,8 @@
+import React from 'react'
+import { Select } from 'antd'
+
+const Option = Select.Option
+
 export default {
   formatDate(time) {
     if (!time) {
@@ -11,7 +16,7 @@ export default {
     const month = format(d.getMonth() + 1)
     const date = format(d.getDate())
     const week = d.getDay()
-    const array = ['日','一','二','三','四','五','六']
+    const array = ['日', '一', '二', '三', '四', '五', '六']
     const weeks = array[week]
     const hours = format(d.getHours())
     const minutes = format(d.getMinutes())
@@ -22,6 +27,34 @@ export default {
   isNight() {
     let now = new Date()
     let hour = now.getHours()
-    return hour > 19 || hour < 6 ? true: false
+    return hour > 19 || hour < 6 ? true : false
+  },
+  pagination(data, callback) {
+    return {
+      onChange: current => {
+        callback(current)
+      },
+      current: Number(data.result.page),
+      pageSize: data.result.page_size,
+      total: data.result.total_count,
+      showTotal: () => {
+        return `共${data.result.total_count}条`
+      },
+      showQuickJumper: true
+    }
+  },
+  getOptionList(data) {
+    if (!data) {
+      return []
+    }
+    let options = [] //[<Option value="0" key="all_key">全部</Option>];
+    data.forEach((item) => {
+      options.push(
+        <Option key={item.id}>
+          {item.name}
+        </Option>
+      )
+    })
+    return options
   }
 }

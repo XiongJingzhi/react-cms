@@ -14,6 +14,7 @@ import Carousel from '@/pages/ui/carousel'
 import FormLogin from '@/pages/form/login'
 import FormRegister from '@/pages/form/register'
 import BasicTable from '@/pages/table/basic'
+import HighTable from '@/pages/table/high'
 import RichEdit from '@/pages/editor'
 import City from '@/pages/city'
 import Order from '@/pages/order'
@@ -39,6 +40,7 @@ const routes = [
   { path: '/form/login', component: FormLogin },
   { path: '/form/register', component: FormRegister },
   { path: '/table/basic', component: BasicTable },
+  { path: '/table/high', component: HighTable },
   { path: '/editor', component: RichEdit },
   { path: '/city', component: City },
   { path: '/order', component: Order },

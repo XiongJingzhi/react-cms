@@ -7,6 +7,9 @@ const FormItem = Form.Item
 const Option = Select.Option
 
 class FilterForm extends Component {
+  cb = () => {
+    this.props.callback(this.props.form.getFieldsValue())
+  }
   render() {
     const { getFieldDecorator } = this.props.form
     return (
@@ -49,7 +52,11 @@ class FilterForm extends Component {
           )}
         </FormItem>
         <FormItem>
-          <Button type="primary" style={{ margin: '0 20px' }}>
+          <Button
+            type="primary"
+            style={{ margin: '0 20px' }}
+            onClick={ this.cb }
+          >
             查询
           </Button>
           <Button>重置</Button>
@@ -113,40 +120,45 @@ OpenCityForm = Form.create({})(OpenCityForm)
 export default class City extends Component {
   state = {
     list: [],
-    isShowOpenCity: false
+    isShowOpenCity: false,
+    selectedRowKeys: [],
   }
   params = {
     page: 1
   }
   componentDidMount() {
-    this.requestList()
+    this.requestList(this.params)
   }
 
   // 默认请求我们的接口数据
-  requestList = () => {
-    // let _this = this
+  requestList = (options) => {
+    let _this = this
     Axios
       .ajax({
         url: '/open_city',
         data: {
           params: {
-            page: this.params.page
+            page: options.page,
+            city_id: options.city_id,
+            mode: options.mode,
+            op_mode: options.op_mode,
+            auth_status: options.auth_status
           }
         }
       })
         .then(res => {
           console.log('res response', res)
-          // let list = res.result.item_list.map((item, index) => {
-          //   item.key = index
-          //   return item
-          // })
-          // this.setState({
-          //   list: list,
-          //   pagination: Utils.pagination(res, current => {
-          //     _this.params.page = current
-          //     _this.requestList()
-          //   })
-          // })
+          let list = res.result.item_list.map((item, index) => {
+            item.key = index
+            return item
+          })
+          this.setState({
+            list: list,
+            pagination: Utils.pagination(res, current => {
+              _this.params.page = current
+              _this.requestList( _this.params)
+            })
+          })
         })
         .catch((err) => {
           console.log('err', err)
@@ -166,19 +178,25 @@ export default class City extends Component {
     Axios
       .ajax({
         url: '/city/open',
+        method: 'post',
         data: {
           params: cityInfo
         }
       })
       .then(res => {
-        if (res.code === '0') {
+        if (res.code === 0) {
           message.success('开通成功')
           this.setState({
             isShowOpenCity: false
           })
-          this.requestList()
+          this.requestList(this.params)
         }
       })
+  }
+  // 使用回调传递子组件事件
+  callback = (msg) => {
+    console.log('supComponent', msg)
+    this.requestList(msg)
   }
   render() {
     const columns = [
@@ -236,21 +254,21 @@ export default class City extends Component {
     return (
       <div>
         <Card>
-          <FilterForm />
+          <FilterForm callback = {this.callback}/>
         </Card>
         <Card style={{ marginTop: 10 }}>
           <Button type="primary" onClick={this.handleOpenCity}>
             开通城市
           </Button>
+          <div className="content-wrap">
+            <Table
+              bordered
+              columns={columns}
+              dataSource={this.state.list}
+              pagination={this.state.pagination}
+            />
+          </div>
         </Card>
-        <div className="content-wrap">
-          <Table
-            bordered
-            columns={columns}
-            dataSource={this.state.list}
-            pagination={this.state.pagination}
-          />
-        </div>
         <Modal
           title="开通城市"
           visible={this.state.isShowOpenCity}
