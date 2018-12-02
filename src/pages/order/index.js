@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Button, Table, Modal, Form } from 'antd'
+import { Card, Button, Table, Modal, Form, message } from 'antd'
 import BaseForm from '@/components/BaseForm'
 import Axios from '@/axios'
 import Utils from '@/utils/util'
@@ -77,6 +77,74 @@ export default class Order extends Component {
     this.requestList()
   }
 
+  openOrderDetail = () => {
+    let item = this.state.selectedItem
+    if (!item) {
+      Modal.info({
+        title: '信息',
+        content: '请先选择一条订单'
+      })
+      return
+    }
+    window.open(`/#/common/order/detail/${item.id}`, '_blank')
+  }
+
+  // 订单结束确认
+  handleConfirm = () => {
+    let item = this.state.selectedItem
+    if (!item) {
+      Modal.info({
+        title: '信息',
+        content: '请选择一条订单进行结束'
+      })
+      return
+    }
+    Axios.ajax({
+      url: '/order/bike_info',
+      data: {
+        params: {
+          orderId: item.id
+        }
+      }
+    }).then(res => {
+      if (res.code === 0) {
+        this.setState({
+          orderInfo: res.result,
+          orderConfirmVisible: true
+        })
+      }
+    })
+  }
+  // 结束订单
+  handleFinishOrder = () => {
+    let item = this.state.selectedItem
+    Axios.ajax({
+      url: '/order/finish_order',
+      data: {
+        params: {
+          orderId: item.id
+        }
+      }
+    }).then(res => {
+      if (res.code === 0) {
+        message.success('订单结束成功')
+        this.setState({
+          orderConfirmVisible: false
+        })
+        this.requestList()
+      }
+    })
+  }
+
+  onRowClick = (record, index) => {
+    console.log('onRowClick', record, index)
+    let selectKey = [index]
+    this.setState({
+      selectedRowKeys: selectKey,
+      selectedItem: record
+    })
+  }
+
   render() {
     const columns = [
       {
@@ -135,6 +203,11 @@ export default class Order extends Component {
         span: 20
       }
     }
+    const selectedRowKeys = this.state.selectedRowKeys
+    const rowSelection = {
+      type: 'radio',
+      selectedRowKeys
+    }
     return (
       <div>
         <Card>
@@ -158,10 +231,11 @@ export default class Order extends Component {
             columns={columns}
             dataSource={this.state.list}
             pagination={this.state.pagination}
+            rowSelection={rowSelection}
             onRow={(record, index) => {
               return {
                 onClick: () => {
-                  this.onClick(record, index)
+                  this.onRowClick(record, index)
                 }
               }
             }}
@@ -170,9 +244,11 @@ export default class Order extends Component {
         <Modal
           title="结束订单"
           visible={this.state.orderConfirmVisible}
-          onCancel={() => this.state({
-            orderConfirmVisible: false
-          })}
+          onCancel={() =>
+            this.state({
+              orderConfirmVisible: false
+            })
+          }
           onOk={this.handleFinishOrder}
           width={600}
         >

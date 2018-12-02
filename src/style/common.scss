@@ -1,5 +1,18 @@
 @import './default';
 
+ul li {
+  list-style: none;
+}
+
+.clearFix {
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
 .container {
   .nav-left {
     height: calc(100vh);
