@@ -225,22 +225,24 @@ export default class Order extends Component {
             结束订单
           </Button>
         </Card>
-        <div className="content-warp">
-          <Table
-            bordered
-            columns={columns}
-            dataSource={this.state.list}
-            pagination={this.state.pagination}
-            rowSelection={rowSelection}
-            onRow={(record, index) => {
-              return {
-                onClick: () => {
-                  this.onRowClick(record, index)
+        <Card>
+          <div className="content-warp">
+            <Table
+              bordered
+              columns={columns}
+              dataSource={this.state.list}
+              pagination={this.state.pagination}
+              rowSelection={rowSelection}
+              onRow={(record, index) => {
+                return {
+                  onClick: () => {
+                    this.onRowClick(record, index)
+                  }
                 }
-              }
-            }}
-          />
-        </div>
+              }}
+            />
+          </div>
+        </Card>
         <Modal
           title="结束订单"
           visible={this.state.orderConfirmVisible}

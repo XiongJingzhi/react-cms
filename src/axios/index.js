@@ -32,11 +32,6 @@ export default class Axios {
   }
 
   static ajax(options) {
-    // let loading
-    // if (options.data && options.data.isShowLoading !== false) {
-    //   loading = document.getElementById('ajaxLoading')
-    //   loading.style.display = 'block'
-    // }
     let baseApi = 'https://www.easy-mock.com/mock/5bfcb54e0dae3c3de7500e28/admin'
     return new Promise((resolve, reject) => {
       axios({
@@ -47,10 +42,6 @@ export default class Axios {
         params: (options.data && options.data.params) || ''
       })
         .then((response) => {
-          // if (options.data && options.data.isShowLoading !== false) {
-          //   loading = document.getElementById('ajaxLoading')
-          //   loading.style.display = 'block'
-          // }
           console.log('response', response)
           if (response.status === 200 ) {
             let res = response.data
