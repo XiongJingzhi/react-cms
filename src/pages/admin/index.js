@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
+import { connect } from 'react-redux'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import NavLeft from '@/components/NavLeft'
 import '../../style/common.scss'
 
-export default class Admin extends Component {
+class Admin extends Component {
   render() {
     return (
       <div>
@@ -14,7 +15,7 @@ export default class Admin extends Component {
             <NavLeft></NavLeft>
           </Col>
           <Col span={20} className="main">
-            <Header></Header>
+            <Header ></Header>
             <Row className="content">
               {this.props.children}
             </Row>
@@ -25,3 +26,5 @@ export default class Admin extends Component {
     )
   }
 }
+
+export default connect()(Admin)
